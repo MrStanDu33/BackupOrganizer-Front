@@ -6,6 +6,10 @@ export default [
     redirect: <object> { name: <string> 'Login' },
   },
   {
+    path: <string> '/login',
+    redirect: <object> { name: <string> 'Login' },
+  },
+  {
     path: <string> 'login',
     name: <string> 'Login',
     component: Login,
