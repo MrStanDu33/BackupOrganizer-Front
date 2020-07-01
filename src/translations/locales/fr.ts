@@ -6,6 +6,6 @@ export default {
     forgotPass: <string> 'Mot de passe oublié ?',
     new: <string> 'Nouveau ici ?',
     createAccount: <string> 'Créer un compte !',
-    errorMessage: <string> 'L\'adresse e-mail et le mot de passe que vous avez saisis ne correspondent pas.',
+    errorMessage: <string> 'L\'identifiant et le mot de passe que vous avez saisis ne correspondent pas.',
   },
 };
