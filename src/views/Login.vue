@@ -71,6 +71,8 @@ export default Vue.extend({
 
   methods: {
     pushLog() {
+      this.error = false;
+      this.errorMessage = '';
       this.loading = true;
       // insert request her
       window.setTimeout(this.failConnect, 2000);
