@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
+import { getModule } from 'vuex-module-decorators';
 
 import Store from '@/store';
 import LanguageModule from '@/store/modules/Language';

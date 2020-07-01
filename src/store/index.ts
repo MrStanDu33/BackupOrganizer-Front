@@ -1,15 +1,12 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { Module } from 'vuex';
+import Language from '@/store/modules/Language';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
   modules: {
+    Language,
   },
 });
