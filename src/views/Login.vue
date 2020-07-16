@@ -72,13 +72,12 @@ export default Vue.extend({
 
   methods: {
     pushLog() {
-      this.error = false;
-      this.errorMessage = '';
-      this.loading = true;
-      // insert request her
+      this.error = false as boolean;
+      this.errorMessage = '' as string;
+      this.loading = true as boolean;
       const log = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
+        email: (document.getElementById('email') as HTMLInputElement).value || 'null',
+        password: ((document.getElementById('password') as HTMLInputElement).value) || 'null',
       };
       const xhr = new XMLHttpRequest();
       xhr.open('POST', `${this.$store.state.API}/user/login`, true);
@@ -93,14 +92,14 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify(log));
     },
-    connected(response) {
+    connected(response:string) {
       localStorage.setItem('token', JSON.parse(response).accessToken);
       this.$router.push({ name: 'Dashboard' });
     },
     failConnect() {
       this.loading = false;
       this.error = true;
-      this.errorMessage = this.$t('login.errorMessage');
+      this.errorMessage = this.$t('login.errorMessage') as string;
     },
   },
 
