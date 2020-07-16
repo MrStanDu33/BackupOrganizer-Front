@@ -18,7 +18,8 @@ export default {
     backups: <string> 'Sauvegardes',
     billing: <string> 'Facturation',
     useraccount: <string> 'Comptes utilisateurs',
-    theme: <string> 'Thème sombre/lumineux',
-    lang: <string> 'Changer de langue',
+    darkTheme: <string> 'Passer en thème sombre',
+    whiteTheme: <string> 'Passer en thème lumineux',
+    switchLang: <string> 'Passer en français',
   },
 };
