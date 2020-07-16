@@ -1,4 +1,5 @@
 import Login from '../views/Login.vue';
+import Dashboard from '../views/Dashboard.vue';
 
 export default [
   {
@@ -19,6 +20,22 @@ export default [
         en: <string> 'Connection',
       },
       menu: false,
+    },
+  },
+  {
+    path: <string> '/dashboard',
+    redirect: <object> { name: <string> 'Dashboard' },
+  },
+  {
+    path: <string> 'dashboard',
+    name: <string> 'Dashboard',
+    component: Dashboard,
+    meta: <object> {
+      name: <object> {
+        fr: <string> 'Tableau de bord',
+        en: <string> 'Dashboard',
+      },
+      menu: true,
     },
   },
 ];
