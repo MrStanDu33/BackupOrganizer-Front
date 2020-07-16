@@ -1,7 +1,7 @@
 export default {
   login: <object> {
     connection: <string> 'Connection',
-    username: <string> 'Username',
+    email: <string> 'Email',
     password: <string> 'Password',
     forgotPass: <string> 'Forgot password ?',
     new: <string> 'New here ?',
