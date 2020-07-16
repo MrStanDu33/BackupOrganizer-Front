@@ -18,7 +18,7 @@ export default {
     backups: <string> 'Backups',
     billing: <string> 'Billing',
     useraccount: <string> 'User accounts',
-    theme: <string> 'Dark/wight theme',
+    theme: <string> 'Dark/white theme',
     lang: <string> 'Change language',
   },
 };
