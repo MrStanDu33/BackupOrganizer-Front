@@ -75,17 +75,18 @@
       link
       v-on:click="$vuetify.theme.dark = !$vuetify.theme.dark">
         <v-list-item-icon>
-          <v-icon>mdi-theme-light-dark</v-icon>
+          <v-icon>{{darkOrWite}}</v-icon>
         </v-list-item-icon>
         <v-list-item-title>{{$t('menu.theme')}}</v-list-item-title>
       </v-list-item>
-      <v-menu
+      <v-divider></v-divider>
+    <v-menu
       transition="slide-x-transition"
       bottom
-      right
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
+          id="langButton"
           v-bind="attrs"
           v-on="on"
           block
@@ -96,15 +97,16 @@
 
       <v-list>
         <v-list-item
-        class="blue"
+          class="primary"
           color="primary"
           dark
           v-for="(item, i) in $i18n.availableLocales"
           :key="i"
           @click="$i18n.locale = item"
         >
-          <v-list-item-title
-          >{{ item }}</v-list-item-title>
+          <v-list-item-title>
+            {{ item }}
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -123,9 +125,24 @@ export default Vue.extend({
   },
 
   data: () => ({
-    //
+    drawer: {
+      expand: true,
+    },
   }),
 
+  methods: {
+  },
+
+  computed: {
+    darkOrWite() {
+      if (this.$vuetify.theme.dark) {
+        return 'mdi-white-balance-sunny';
+      } return 'mdi-weather-night';
+    },
+  },
+
+  mounted() {
+  },
 });
 </script>
 
