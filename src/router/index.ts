@@ -29,6 +29,11 @@ Router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    Router.push({ name: 'Login' });
+  }
 });
 
 export default Router;
