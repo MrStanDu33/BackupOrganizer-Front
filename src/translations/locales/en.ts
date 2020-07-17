@@ -1,7 +1,7 @@
 export default {
   login: <object> {
     connection: <string> 'Connection',
-    username: <string> 'Username',
+    email: <string> 'Email',
     password: <string> 'Password',
     forgotPass: <string> 'Forgot password ?',
     new: <string> 'New here ?',
@@ -11,14 +11,16 @@ export default {
   menu: <object> {
     logout: <string> 'Logout',
     dashboard: <string> 'Dashboard',
-    clients: <string> 'Clients',
+    clients: <string> 'Customers',
     projects: <string> 'Projects',
     websites: <string> 'Websites',
     database: <string> 'Data base',
     backups: <string> 'Backups',
     billing: <string> 'Billing',
     useraccount: <string> 'User accounts',
-    theme: <string> 'Dark/white theme',
+    darkTheme: <string> 'Switch to dark theme',
+    whiteTheme: <string> 'Switch to white theme',
+    switchLang: <string> 'Switch to english',
     lang: <string> 'Change language',
   },
 };

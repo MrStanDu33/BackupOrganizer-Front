@@ -5,7 +5,9 @@ import Language from '@/store/modules/Language';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    API: 'http://backup-organizer.localhost/api/v1',
+  },
   modules: {
     Language,
   },

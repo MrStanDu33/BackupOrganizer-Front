@@ -14,16 +14,20 @@
         lazy-validation
         align="end">
           <v-text-field
-          :label="$t('login.username')"
+          @keydown.enter="pushLog"
+          :label="$t('login.email')"
+          id="email"
           outlined
           required
           :error="error"
           >
           </v-text-field>
           <v-text-field
+          @keydown.enter="pushLog"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"
           name="input-10-2"
+          id="password"
           :label="$t('login.password')"
           @click:append="showPassword = !showPassword"
           outlined
@@ -66,24 +70,36 @@ export default Vue.extend({
   components: {
   },
 
-  computed: {
-  },
-
   methods: {
     pushLog() {
-      this.error = false;
-      this.errorMessage = '';
-      this.loading = true;
-      // insert request her
-      window.setTimeout(this.failConnect, 2000);
+      this.error = false as boolean;
+      this.errorMessage = '' as string;
+      this.loading = true as boolean;
+      const log = {
+        email: (document.getElementById('email') as HTMLInputElement).value || 'null',
+        password: ((document.getElementById('password') as HTMLInputElement).value) || 'null',
+      };
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `${this.$store.state.API}/user/login`, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = () => {
+        if (xhr.status === 200) {
+          this.connected(xhr.response);
+        }
+        if (xhr.status === 401) {
+          this.failConnect();
+        }
+      };
+      xhr.send(JSON.stringify(log));
     },
-    connected() {
-      this.$router.push({ name: 'dashboard' });
+    connected(response:string) {
+      localStorage.setItem('token', JSON.parse(response).accessToken);
+      this.$router.push({ name: 'Dashboard' });
     },
     failConnect() {
       this.loading = false;
       this.error = true;
-      this.errorMessage = this.$t('login.errorMessage');
+      this.errorMessage = this.$t('login.errorMessage') as string;
     },
   },
 
