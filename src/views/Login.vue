@@ -55,7 +55,8 @@
     >
     <v-card-text
     align="center">
-      {{$t('login.new')}} <a>{{$t('login.createAccount')}}</a>
+      {{$t('login.new')}}
+      <a @click="$router.push({ name: 'New Account' })">{{$t('login.createAccount')}}</a>
     </v-card-text>
     </v-card>
   </v-main>
