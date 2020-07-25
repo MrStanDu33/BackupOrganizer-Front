@@ -123,7 +123,7 @@ export default Vue.extend({
       }
     },
     setErrorName() {
-      // this.errorName = true as boolean;
+      this.errorName = true as boolean;
       this.errorMessageName = this.$t('newAccount.errorName') as string;
       this.loading = false;
     },
@@ -135,12 +135,12 @@ export default Vue.extend({
       }
     },
     setErrorMailStructure() {
-      // this.errorMail = true as boolean;
+      this.errorMail = true as boolean;
       this.errorMessageMail = this.$t('newAccount.errorMailStructure') as string;
       this.loading = false;
     },
     setErrorMailExist() {
-      // this.errorMail = true as boolean;
+      this.errorMail = true as boolean;
       this.errorMessageMail = this.$t('newAccount.errorMailExist') as string;
       this.loading = false;
     },
@@ -151,7 +151,7 @@ export default Vue.extend({
       }
     },
     setErrorPassword() {
-      // this.errorPassword = true as boolean;
+      this.errorPassword = true as boolean;
       this.errorMessagePassword = this.$t('newAccount.errorPassword') as string;
       this.loading = false;
     },
