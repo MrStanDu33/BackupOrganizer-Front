@@ -84,11 +84,24 @@ export default Vue.extend({
       xhr.open('POST', `${this.$store.state.API}/user/login`, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onreadystatechange = () => {
-        if (xhr.status === 200) {
+        if (xhr.readyState !== xhr.DONE) return;
+        if (xhr.status === 201) {
           this.connected(xhr.response);
         }
         if (xhr.status === 401) {
           this.failConnect();
+          // TODO: add this.setErrorMailExist();
+        }
+        if (xhr.status === 422) {
+          const { errors } = JSON.parse(xhr.response);
+          if (errors.email) {
+            this.failConnect();
+            // TODO: add this.setErrorMailStructure();
+          }
+          if (errors.password) {
+            this.failConnect();
+            // TODO: add this.setErrorPassword();
+          }
         }
       };
       xhr.send(JSON.stringify(log));
