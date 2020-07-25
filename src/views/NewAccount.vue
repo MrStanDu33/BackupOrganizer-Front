@@ -177,6 +177,7 @@ export default Vue.extend({
       xhr.open('POST', `${this.$store.state.API}/user/register`, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onreadystatechange = () => {
+        if (xhr.readyState !== xhr.DONE) return;
         if (xhr.status === 201) {
           this.connect(xhr.response);
         }
@@ -184,7 +185,7 @@ export default Vue.extend({
           this.setErrorMailExist();
         }
         if (xhr.status === 422) {
-          const errors = JSON.parse(xhr.responseText);
+          const { errors } = JSON.parse(xhr.response);
           if (errors.email) {
             this.setErrorMailStructure();
           }
@@ -195,8 +196,8 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify(log));
     },
-    connect(response:string) {
-      localStorage.setItem('token', JSON.parse(response).accessToken);
+    connect(response:any) {
+      localStorage.setItem('token', response.accessToken);
       this.$router.push({ name: 'Dashboard' });
     },
   },
