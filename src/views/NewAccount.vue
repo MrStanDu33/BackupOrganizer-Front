@@ -163,7 +163,7 @@ export default Vue.extend({
       }
     },
     setErrorPasswordConfirm() {
-      // this.errorConfirm = true as boolean;
+      this.errorConfirm = true as boolean;
       this.errorMessageConfirm = this.$t('newAccount.errorConfirm') as string;
       this.loading = false;
     },
