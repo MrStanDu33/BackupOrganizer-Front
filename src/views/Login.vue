@@ -93,7 +93,7 @@ export default Vue.extend({
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== xhr.DONE) return;
-        if (xhr.status === 201) {
+        if (xhr.status === 200) {
           this.connected(xhr.response);
         }
         if (xhr.status === 401) {
