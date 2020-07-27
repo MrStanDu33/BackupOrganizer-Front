@@ -75,8 +75,8 @@ export default Vue.extend({
   methods: {
     checkLog() {
       this.resetError();
-      this.checkMail();
-      this.checkPassword();
+      // this.checkMail();
+      // this.checkPassword();
       if (!this.errorMail && !this.errorPassword) {
         this.pushLog();
       }
@@ -100,11 +100,11 @@ export default Vue.extend({
           this.setErrorInvalidCredentials();
         }
         if (xhr.status === 422) {
-          const { errors } = JSON.parse(xhr.response);
-          if (errors.email) {
+          const { message } = JSON.parse(xhr.response);
+          if (message.email) {
             this.setErrorMailStructure();
           }
-          if (errors.password) {
+          if (message.password) {
             this.setErrorPassword();
           }
         }
