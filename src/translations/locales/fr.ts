@@ -6,7 +6,9 @@ export default {
     forgotPass: 'Mot de passe oublié ?' as string,
     new: 'Nouveau ici ?' as string,
     createAccount: 'Créer un compte !' as string,
-    errorMessage: 'L\'identifiant et le mot de passe que vous avez saisis ne correspondent pas.' as string,
+    errorInvalidCredentials: 'L\'identifiant et le mot de passe que vous avez saisis ne correspondent pas.' as string,
+    errorMailStructure: 'Vous devez indiquer une adresse mail valide.' as string,
+    errorPassword: 'Votre mot de passe doit contenir au moins 8 caractères.' as string,
   },
   newAccount: <object> {
     createAccount: 'Créez votre compte' as string,

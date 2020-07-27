@@ -6,7 +6,9 @@ export default {
     forgotPass: 'Forgot password ?' as string,
     new: 'New here ?' as string,
     createAccount: 'Create an account !' as string,
-    errorMessage: 'The username and password you entered don\'t match.' as string,
+    errorInvalidCredentials: 'The username and password you entered don\'t match.' as string,
+    errorMailStructure: 'You must provide a valid email address.' as string,
+    errorPassword: 'Your password must contain at least 8 characters.' as string,
   },
   newAccount: <object> {
     createAccount: 'Create your account' as string,

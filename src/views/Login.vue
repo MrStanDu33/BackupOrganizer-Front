@@ -14,16 +14,17 @@
         lazy-validation
         align="end">
           <v-text-field
-          @keydown.enter="pushLog"
+          @keydown.enter="checkLog"
           :label="$t('login.email')"
           id="email"
           outlined
           required
-          :error="error"
+          :error="errorMail"
+          :error-messages="errorMessageMail"
           >
           </v-text-field>
           <v-text-field
-          @keydown.enter="pushLog"
+          @keydown.enter="checkLog"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"
           name="input-10-2"
@@ -32,8 +33,8 @@
           @click:append="showPassword = !showPassword"
           outlined
           required
-          :error="error"
-          :error-messages="errorMessage"
+          :error="errorPassword"
+          :error-messages="errorMessagePassword"
           >
           </v-text-field>
           <a class="subtitle-2">{{$t('login.forgotPass')}}</a>
@@ -42,7 +43,7 @@
         class="mt-5"
         block
         color="success"
-        @click="pushLog"
+        @click="checkLog"
         >
           {{$t('login.connection')}}
         </v-btn>
@@ -72,9 +73,16 @@ export default Vue.extend({
   },
 
   methods: {
+    checkLog() {
+      this.resetError();
+      this.checkMail();
+      this.checkPassword();
+      if (!this.errorMail && !this.errorPassword) {
+        this.pushLog();
+      }
+    },
     pushLog() {
-      this.error = false as boolean;
-      this.errorMessage = '' as string;
+      this.resetError();
       this.loading = true as boolean;
       const log = {
         email: (document.getElementById('email') as HTMLInputElement).value || 'null',
@@ -89,41 +97,69 @@ export default Vue.extend({
           this.connected(xhr.response);
         }
         if (xhr.status === 401) {
-          this.failConnect();
-          // TODO: add this.setErrorMailExist();
+          this.setErrorInvalidCredentials();
         }
         if (xhr.status === 422) {
           const { errors } = JSON.parse(xhr.response);
           if (errors.email) {
-            this.failConnect();
-            // TODO: add this.setErrorMailStructure();
+            this.setErrorMailStructure();
           }
           if (errors.password) {
-            this.failConnect();
-            // TODO: add this.setErrorPassword();
+            this.setErrorPassword();
           }
         }
       };
       xhr.send(JSON.stringify(log));
     },
+    setErrorInvalidCredentials() {
+      this.errorMail = true as boolean;
+      this.errorPassword = true as boolean;
+      this.errorMessagePassword = this.$t('login.errorInvalidCredentials') as string;
+      this.loading = false as boolean;
+    },
+    checkMail() {
+      const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$/;
+      const mail = (document.getElementById('email') as HTMLInputElement).value;
+      if (!regex.test(mail)) {
+        this.setErrorMailStructure();
+      }
+    },
+    setErrorMailStructure() {
+      this.errorMail = true as boolean;
+      this.errorMessageMail = this.$t('login.errorMailStructure') as string;
+      this.loading = false as boolean;
+    },
+    checkPassword() {
+      const password = (document.getElementById('password') as HTMLInputElement).value;
+      if (password.length < 8) {
+        this.setErrorPassword();
+      }
+    },
+    setErrorPassword() {
+      this.errorPassword = true as boolean;
+      this.errorMessagePassword = this.$t('login.errorPassword') as string;
+      this.loading = false as boolean;
+    },
+    resetError() {
+      this.errorMail = false as boolean;
+      this.errorMessageMail = '' as string;
+      this.errorPassword = false as boolean;
+      this.errorMessagePassword = '' as string;
+    },
     connected(response:any) {
       localStorage.setItem('token', response.accessToken);
       this.$router.push({ name: 'Dashboard' });
     },
-    failConnect() {
-      this.loading = false;
-      this.error = true;
-      this.errorMessage = this.$t('login.errorMessage') as string;
-    },
   },
 
   data: () => ({
-    valid: true,
-    showPassword: false,
-    loading: false,
-    error: false,
-    errorMessage: '',
-    //
+    valid: true as boolean,
+    showPassword: false as boolean,
+    loading: false as boolean,
+    errorMail: false as boolean,
+    errorPassword: false as boolean,
+    errorMessageMail: '' as string,
+    errorMessagePassword: '' as string,
   }),
 });
 </script>
