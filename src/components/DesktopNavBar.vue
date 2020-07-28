@@ -36,7 +36,7 @@
         <v-list-item-title>{{$t('menu.dashboard')}}</v-list-item-title>
       </v-list-item>
       <v-list-item link
-      @click="$router.push({ name: 'Client' })">
+      @click="$router.push({ name: 'Customers' })">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
