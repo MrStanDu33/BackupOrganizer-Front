@@ -197,7 +197,8 @@ export default Vue.extend({
       xhr.send(JSON.stringify(log));
     },
     connect(response:any) {
-      localStorage.setItem('token', response.accessToken);
+      const { accessToken } = JSON.parse(response);
+      localStorage.setItem('token', accessToken);
       this.$router.push({ name: 'Dashboard' });
     },
   },
