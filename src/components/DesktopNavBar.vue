@@ -28,13 +28,15 @@
     <v-divider></v-divider>
 
     <v-list nav dense>
-      <v-list-item link>
+      <v-list-item link
+      @click="$router.push({ name: 'Dashboard' })">
         <v-list-item-icon>
           <v-icon>mdi-view-dashboard</v-icon>
         </v-list-item-icon>
         <v-list-item-title>{{$t('menu.dashboard')}}</v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link
+      @click="$router.push({ name: 'Client' })">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>

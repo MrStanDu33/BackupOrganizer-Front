@@ -5,8 +5,12 @@
     <MobileNavBar
     v-if=" $route.meta.menu && DisplayMobile"/>
     <v-main>
-      <v-container fill-height fluid>
-        <router-view></router-view>
+      <v-container fill-height fluid >
+        <transition
+        name="scroll-y-transition"
+        mode="out-in">
+          <router-view></router-view>
+        </transition>
       </v-container>
     </v-main>
   </v-app>
