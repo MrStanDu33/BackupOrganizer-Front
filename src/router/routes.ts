@@ -1,6 +1,7 @@
 import Login from '../views/Login.vue';
 import Dashboard from '../views/Dashboard.vue';
 import NewAccount from '../views/NewAccount.vue';
+import Customers from '../views/Customers.vue';
 
 export default [
   {
@@ -43,9 +44,9 @@ export default [
     },
   },
   {
-    path: <string> '/client',
-    name: <string> 'Client',
-    component: Dashboard,
+    path: <string> '/customers',
+    name: <string> 'Customers',
+    component: Customers,
     meta: <object> {
       name: <object> {
         fr: <string> 'Clients',
