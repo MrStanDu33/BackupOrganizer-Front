@@ -18,7 +18,7 @@ export default Vue.extend({
       required: false as boolean,
     },
     customer: {
-      type: Object as PropType<any>,
+      type: Object,
       required: true as boolean,
     },
   },
@@ -46,7 +46,7 @@ export default Vue.extend({
       const { customer } = this;
       const { logo } : any = customer;
       const { avatar } : any = customer;
-      if (logo === null || avatar === undefined) {
+      if (logo === null || avatar === null) {
         return false;
       }
       return true;
@@ -58,8 +58,9 @@ export default Vue.extend({
         if (customer.name) {
           if (customer.name.search(' ')) {
             splitName = customer.name.split(' ');
+          } else {
+            splitName = [customer.name];
           }
-          splitName = [customer.name];
         }
         const firstleter:Array<any> = [];
         if (splitName.length > 0) {
