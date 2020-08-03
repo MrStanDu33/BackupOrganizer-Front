@@ -2,6 +2,7 @@ import Login from '../views/Login.vue';
 import Dashboard from '../views/Dashboard.vue';
 import NewAccount from '../views/NewAccount.vue';
 import Customers from '../views/Customers.vue';
+import CustomerDetails from '../views/CustomerDetails.vue';
 
 export default [
   {
@@ -51,6 +52,19 @@ export default [
       name: <object> {
         fr: <string> 'Clients',
         en: <string> 'Customers',
+      },
+      menu: true,
+      auth: true,
+    },
+  },
+  {
+    path: <string> '/customer/:customerId',
+    name: <string> 'customerDetails',
+    component: CustomerDetails,
+    meta: <object> {
+      name: <object> {
+        fr: <string> 'Détails du client',
+        en: <string> 'Customer details',
       },
       menu: true,
       auth: true,
