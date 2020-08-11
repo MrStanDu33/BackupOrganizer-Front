@@ -1,15 +1,15 @@
 <template>
   <v-bottom-navigation
     color="blue"
+    fixed
     hide-on-scroll
-    absolute
   >
-    <v-btn>
+    <v-btn @click="$router.push({ name: 'Dashboard' })">
       <span>{{$t('menu.dashboard')}}</span>
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn @click="$router.push({ name: 'Customers' })">
       <span>{{$t('menu.clients')}}</span>
       <v-icon>mdi-account-multiple</v-icon>
     </v-btn>
