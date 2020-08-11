@@ -39,4 +39,94 @@ export default {
     switchLang: 'Switch to english' as string,
     lang: 'Change language' as string,
   },
+  customers: <object> {
+    add: 'Add' as string,
+    customers: 'Customers' as string,
+    logo: 'Logo' as string,
+    name: 'Name' as string,
+    projects: 'Projects' as string,
+    referent: 'Referent' as string,
+  },
+  customerDetails: <object> {
+    profileof: 'Profile of ' as string,
+    details: 'Details' as string,
+    projects: 'Projects' as string,
+    bills: 'Bills' as string,
+  },
+
+  customerForm: <object> {
+    title: <object> {
+      identification: 'Identification' as string,
+      company: 'Company' as string,
+      contact: 'Contact' as string,
+      actions: 'Actions' as string,
+    },
+    formLabel: <object> {
+      siret: 'Siret' as string,
+      name: 'Name' as string,
+      streetNumber: 'Street number' as string,
+      streetName: 'Street name' as string,
+      zip: 'Zip' as string,
+      city: 'City' as string,
+      country: 'Country' as string,
+      billingAddress: 'Billing address' as string,
+      placeholderBilling: 'If different from address' as string,
+      tva: 'TVA number' as string,
+      referentName: 'Referent Name' as string,
+      referentEmail: 'Email' as string,
+      referentNumberIndicative: 'Code' as string,
+      referentNumber: 'Number' as string,
+      website: 'Website' as string,
+      source: 'Source' as string,
+    },
+    button: <object> {
+      autocomplete: 'Autocomplete' as string,
+      save: 'Save' as string,
+      delete: 'Delete' as string,
+      continue: 'Continue' as string,
+      cancel: 'Cancel' as string,
+      create: 'Create' as string,
+    },
+    formError: <object> {
+      siret: <object> {
+        format: 'The SIRET format is not respected.' as string,
+        invalid: 'The SIRET entered does not exist.' as string,
+        conflict: 'The SIRET entered is already in use by another customer.' as string,
+      },
+      name: <object> {
+        required: 'The name is required.' as string,
+      },
+      tva: <object> {
+        length: 'The TVA number must be 13 characters long.' as string,
+      },
+      phone: <object> {
+        invalid: 'The phone number entered is not valid.' as string,
+      },
+      email: <object> {
+        invalid: 'The email address entered is not valid.' as string,
+      },
+      website: <object> {
+        invalid: 'The webiste address entered is not valid.' as string,
+      },
+    },
+    messages: <object> {
+      warning: <object> {
+        autocomplete: 'The following information will be replaced, do you want to continue?' as string,
+        deleteCustomer: 'The user will be deleted permanently, are you sure you want to continue?' as string,
+      },
+      succes: <object> {
+        savedCustomer: 'Customer information has been saved.' as string,
+        pushCustomer: 'The customer file has been successfully created.' as string,
+      },
+      other: <object> {
+        problemEncounterer: 'A problem has been encountered.' as string,
+        deletedCustomerMessagePart1: 'The customer ' as string,
+        deletedCustomerMessagePart2: ' has been successfully deleted, you will be redirected.' as string,
+      },
+    },
+  },
+
+  createCustomer: <object> {
+    createTitle: 'Creation of a new customer' as string,
+  },
 };
