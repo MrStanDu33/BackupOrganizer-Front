@@ -5,22 +5,22 @@
     hide-on-scroll
   >
     <v-btn @click="$router.push({ name: 'Dashboard' })">
-      <span>{{$t('menu.dashboard')}}</span>
+      <span v-if="isXs">{{$t('menu.dashboard')}}</span>
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
     <v-btn @click="$router.push({ name: 'Customers' })">
-      <span>{{$t('menu.clients')}}</span>
+      <span v-if="isXs">{{$t('menu.clients')}}</span>
       <v-icon>mdi-account-multiple</v-icon>
     </v-btn>
 
     <v-btn>
-      <span>{{$t('menu.backups')}}</span>
+      <span v-if="isXs">{{$t('menu.backups')}}</span>
       <v-icon>mdi-cloud-upload</v-icon>
     </v-btn>
 
     <v-btn>
-      <span>{{$t('menu.billing')}}</span>
+      <span v-if="isXs">{{$t('menu.billing')}}</span>
       <v-icon>mdi-cash-multiple</v-icon>
     </v-btn>
 
@@ -37,8 +37,19 @@ export default Vue.extend({
   },
 
   data: () => ({
-    //
+    isXs: false,
   }),
+
+  methods: {
+    onResize() {
+      this.isXs = window.innerWidth > 400;
+    },
+  },
+
+  mounted() {
+    this.onResize();
+    window.addEventListener('resize', this.onResize, { passive: true });
+  },
 
 });
 </script>
