@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-container>
     <h1 class="text-center mb-12">
       <v-icon size="40">mdi-account-multiple</v-icon>
       {{$t('customers.customers')}}
@@ -54,7 +54,7 @@
           </tr>
       </template>
     </v-data-table>
-  </v-main>
+  </v-container>
 </template>
 
 <script lang="ts">

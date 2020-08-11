@@ -4,14 +4,12 @@
     v-if=" $route.meta.menu && !DisplayMobile"/>
     <MobileNavBar
     v-if=" $route.meta.menu && DisplayMobile"/>
-    <v-main>
-      <v-container fill-height fluid >
-        <transition
-        name="scroll-y-transition"
-        mode="out-in">
-          <router-view></router-view>
-        </transition>
-      </v-container>
+    <v-main fill-height fluid >
+      <transition
+      name="scroll-y-transition"
+      mode="out-in">
+        <router-view class="ma-sm-16"></router-view>
+      </transition>
     </v-main>
   </v-app>
 </template>
