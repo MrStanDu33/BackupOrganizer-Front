@@ -31,7 +31,7 @@
           <v-container v-if="warning.type === 'autocomplete'">
             {{$t('customerForm.messages.warning.autocomplete')}}
             <ul>
-              <li v-for="item in warning.existingInformation" :key="item">
+              <li v-for="[item, index] in warning.existingInformation" :key="index">
                 {{$t(`customerForm.formLabel.${item}`)}}
               </li>
             </ul>
@@ -215,12 +215,13 @@
             :label="$t('customerForm.formLabel.referentNumberIndicative')"
             :items="sortedCountriesCode"
             v-model="customerInfo.referent_number_indicative"
+            item-value="code"
           >
           <template slot="selection" slot-scope="data">
-            +{{ data.item.code }}
+            {{ data.item.code }}
           </template>
           <template slot="item" slot-scope="data">
-            {{ data.item.name }} <span class="text--secondary">(+{{ data.item.code }})</span>
+            {{ data.item.name }} <span class="text--secondary">({{ data.item.code }})</span>
           </template>
           </v-select>
           </v-col>
@@ -289,7 +290,7 @@
       v-model="successMessage.display"
       >
       <v-icon>mdi-account-check</v-icon>
-      {{$t(`customerForm.${successMessage.message}`)}}
+      {{$t(`customerForm.messages.success.${successMessage.message}`)}}
       </v-snackbar>
     </v-card>
   </v-container>
@@ -298,7 +299,8 @@
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
 import Vue, { PropType } from 'vue';
-
+// eslint-disable-next-line no-unused-vars
+import { TranslateResult } from 'vue-i18n';
 import countriesCode from '../assets/countriesCode';
 
 export default Vue.extend({
@@ -322,6 +324,7 @@ export default Vue.extend({
   watch: {
     customer(val) {
       this.customerInfo = val;
+      this.referentNumberIndicative();
     },
   },
 
@@ -350,27 +353,27 @@ export default Vue.extend({
     formError: {
       siret: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
       name: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
       tva: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
       phone: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
       email: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
       webiste: {
         error: false as boolean,
-        errorMessage: '' as string,
+        errorMessage: '' as TranslateResult,
       },
     },
   }),
@@ -426,13 +429,13 @@ export default Vue.extend({
 
     pushCustomer() {
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', `${this.$store.state.API}/customer/`, true);
+      xhr.open('POST', `${this.$store.state.API}/customer`, true);
       const token = localStorage.getItem('token');
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.setRequestHeader('Authorization', `Bearer ${token}`);
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== xhr.DONE) return;
-        if (xhr.status === 200) {
+        if (xhr.status === 201) {
           this.successMessage.display = true as boolean;
           this.successMessage.message = 'pushCustomer' as string;
           window.setTimeout(() => {
@@ -591,6 +594,7 @@ export default Vue.extend({
     },
 
     splitReferentNumber() {
+      if (this.customerInfo.referent_number_value < 1) return;
       if (this.customerInfo.referent_number_value.indexOf('.')) {
         const numberSplit = this.customerInfo.referent_number_value.split('.');
         let finalNumber = '' as string;
@@ -611,7 +615,7 @@ export default Vue.extend({
 
     referentNumberIndicative() {
       if (this.customerInfo.referent_number_indicative.length === 0) {
-        this.customerInfo.referent_number_indicative = this.countriesCode.default;
+        this.customerInfo.referent_number_indicative = this.countriesCode.default.code;
       }
     },
 
@@ -628,37 +632,37 @@ export default Vue.extend({
     // ERRORS FORM
     setErrorNameRequired() {
       this.formError.name.error = true as boolean;
-      this.formError.name.errorMessage = this.$t('customerForm.formError.name.required') as string;
+      this.formError.name.errorMessage = this.$t('customerForm.formError.name.required') as TranslateResult;
     },
 
     setErrorTva() {
       this.formError.tva.error = true as boolean;
-      this.formError.tva.errorMessage = this.$t('customerForm.formError.tva.length') as string;
+      this.formError.tva.errorMessage = this.$t('customerForm.formError.tva.length') as TranslateResult;
     },
 
     setErrorPhone() {
       this.formError.phone.error = true as boolean;
-      this.formError.phone.errorMessage = this.$t('customerForm.formError.phone.invalid') as string;
+      this.formError.phone.errorMessage = this.$t('customerForm.formError.phone.invalid') as TranslateResult;
     },
 
     setErrorMail() {
       this.formError.email.error = true as boolean;
-      this.formError.email.errorMessage = this.$t('customerForm.formError.email.invalid') as string;
+      this.formError.email.errorMessage = this.$t('customerForm.formError.email.invalid') as TranslateResult;
     },
 
     setErrorWebsite() {
       this.formError.webiste.error = true as boolean;
-      this.formError.webiste.errorMessage = this.$t('')as string;
+      this.formError.webiste.errorMessage = this.$t('customerForm.formError.website.invalid') as TranslateResult;
     },
 
     siretErrorConflict() {
       this.formError.siret.error = true as boolean;
-      this.formError.siret.errorMessage = this.$t('customerForm.formError.siret.conflict') as string;
+      this.formError.siret.errorMessage = this.$t('customerForm.formError.siret.conflict') as TranslateResult;
     },
 
     resetSiretError() {
       this.formError.siret.error = false as boolean;
-      this.formError.siret.errorMessage = this.$t('') as string;
+      this.formError.siret.errorMessage = '' as string;
     },
 
     resetFormError() {
@@ -680,7 +684,6 @@ export default Vue.extend({
     this.customerInfo = this.customer;
     const siretForm = document.getElementById('siret') as HTMLInputElement;
     siretForm.addEventListener('input', () => { this.checkSiret(siretForm.value); });
-    this.referentNumberIndicative();
   },
 
   computed: {
