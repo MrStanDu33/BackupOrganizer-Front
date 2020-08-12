@@ -6,12 +6,13 @@
     </h1>
       <v-data-table
       :headers="headers"
-      :items="customers"
+      :items="completeCustomers"
       :search="search"
       :loading="isLoading"
       hide-default-footer
       item-key="id"
-      class="elevation-3 rounded"
+      class="elevation-3 rounded ma-lg-16"
+      calculate-widths
     >
       <template v-slot:top>
         <v-toolbar flat>
@@ -35,8 +36,15 @@
             <td class="">
               {{item.name}}
             </td>
-            <td class="">
-              {{item.id}}
+            <td class="text-end">
+              <v-progress-circular
+                v-if="item.projectNumber==='...'"
+                indeterminate
+                color="grey"
+              ></v-progress-circular>
+              <span v-else>
+              {{item.projectNumber}}
+              </span>
             </td>
             <td class="">
               {{item.referent_name}}
@@ -68,8 +76,17 @@ export default Vue.extend({
     Avatar,
   },
 
+  watch: {
+    customers(val) {
+      val.forEach((customer:any) => {
+        this.getCustomerProjects(customer);
+      });
+    },
+  },
+
   data: () => ({
     customers: [] as any,
+    customersProjects: [] as any,
     search: null,
     isLoading: true as boolean,
   }),
@@ -90,6 +107,22 @@ export default Vue.extend({
       };
       xhr.send();
     },
+    getCustomerProjects(customer:any) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `${this.$store.state.API}/project?customerId=${customer.id}`, true);
+      const token = localStorage.getItem('token');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== xhr.DONE) return;
+        if (xhr.status === 200) {
+          // eslint-disable-next-line
+          const projectNumber = JSON.parse(xhr.response).length;
+          this.customersProjects.push({ id: customer.id, projectNumber });
+        }
+      };
+      xhr.send();
+    },
     goToCustomerView(customerId:string) {
       this.$route.params.customerId = customerId as string;
       this.$router.push({ name: 'customerDetails' });
@@ -101,11 +134,18 @@ export default Vue.extend({
   },
 
   computed: {
-    emptyCustomers() {
-      if (this.customers === null) {
-        return true as boolean;
+    completeCustomers() {
+      const customersContainer = {} as any;
+      for (let i = 0; i < this.customers.length; i += 1) {
+        const customer = this.customers[i];
+        customersContainer[customer.id] = customer;
+        customersContainer[customer.id].projectNumber = '...';
       }
-      return false as boolean;
+      for (let i = 0; i < this.customersProjects.length; i += 1) {
+        const data = this.customersProjects[i];
+        customersContainer[data.id].projectNumber = data.projectNumber;
+      }
+      return Object.values(customersContainer);
     },
     headers() {
       return [
@@ -113,6 +153,7 @@ export default Vue.extend({
           text: this.$t('customers.logo'),
           sortable: false,
           value: '',
+          width: 50,
         },
         {
           text: this.$t('customers.name'),
@@ -120,7 +161,9 @@ export default Vue.extend({
         },
         {
           text: this.$t('customers.projects'),
-          value: 'id',
+          value: 'projectNumber',
+          width: 100,
+          align: 'end',
         },
         {
           text: this.$t('customers.referent'),
@@ -130,6 +173,7 @@ export default Vue.extend({
           text: '',
           value: 'view',
           sortable: false,
+          width: 50,
         },
       ];
     },
