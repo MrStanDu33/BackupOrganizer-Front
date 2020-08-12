@@ -38,4 +38,100 @@ export default {
     whiteTheme: 'Passer en thème lumineux' as string,
     switchLang: 'Passer en français' as string,
   },
+  customers: <object> {
+    add: 'Ajouter' as string,
+    customers: 'Clients' as string,
+    logo: 'Logo' as string,
+    name: 'Nom' as string,
+    projects: 'Projets' as string,
+    referent: 'Référent' as string,
+  },
+  customerDetails: <object> {
+    profileof: 'Profil de ' as string,
+    details: 'Détails' as string,
+    projects: 'Projets' as string,
+    bills: 'Factures' as string,
+  },
+  customerForm: <object> {
+    title: <object> {
+      identification: 'Identification' as string,
+      company: 'Entreprise' as string,
+      contact: 'Contact' as string,
+      actions: 'Actions' as string,
+    },
+    formLabel: <object> {
+      siret: 'Siret' as string,
+      name: 'Nom' as string,
+      streetNumber: 'Numéro de rue' as string,
+      streetName: 'Nom de rue' as string,
+      zip: 'Zip' as string,
+      city: 'Ville' as string,
+      country: 'Pays' as string,
+      billingAddress: 'Adresse de facturation' as string,
+      placeholderBilling: 'Si différent de l\'adresse' as string,
+      tva: 'Numéro de TVA' as string,
+      referentName: 'Nom du référent' as string,
+      referentEmail: 'Email' as string,
+      referentNumberIndicative: 'Indicatif' as string,
+      referentNumber: 'Numéro' as string,
+      website: 'Site internet' as string,
+      source: 'Source' as string,
+    },
+    button: <object> {
+      autocomplete: 'Saisie automatique' as string,
+      save: 'Enregistrer' as string,
+      delete: 'Supprimer' as string,
+      continue: 'Continuer' as string,
+      cancel: 'Annuler' as string,
+      create: 'Créer' as string,
+    },
+    formError: <object> {
+      siret: <object> {
+        format: 'Le format SIRET n\'est pas respecté.' as string,
+        invalid: 'Le SIRET saisi n\'existe pas.' as string,
+        conflict: 'Le SIRET saisi est déjà utilisé par un autre client.' as string,
+      },
+      name: <object> {
+        required: 'Le nom est obligatoire' as string,
+      },
+      tva: <object> {
+        length: 'Le numéro de TVA doit comporter 13 caractères.' as string,
+      },
+      phone: <object> {
+        invalid: 'Le numéro de téléphone entré n\'est pas valide.' as string,
+      },
+      email: <object> {
+        invalid: 'L\'adresse mail renseigné n\'est pas valide.' as string,
+      },
+      website: <object> {
+        invalid: 'The webiste address entered is not valid.' as string,
+      },
+    },
+    messages: <object> {
+      warning: <object> {
+        autocomplete: 'Les informations suivantes vont être remplacé, voulez vous continuer ?' as string,
+        deleteCustomer: 'L\'utilisateur sera supprimé définitivement, êtes-vous certain de vouloir continuer ?' as string,
+      },
+      success: <object> {
+        savedCustomer: 'Les informations client ont été enregistrées.' as string,
+        pushCustomer: 'Le fichier client a été créé avec succès.' as string,
+      },
+      other: <object> {
+        problemEncounterer: 'Un problème à été rencontré.' as string,
+        deletedCustomerMessagePart1: 'Le client ' as string,
+        deletedCustomerMessagePart2: ' à été supprimé avec succès, vous allez être redirigé.' as string,
+      },
+    },
+  },
+  createCustomer: <object> {
+    createTitle: 'Création d\'un nouveau client' as string,
+  },
+  customerProjects: <object> {
+    title: 'Projets' as string,
+    dataHeader: <object> {
+      name: 'Nom' as string,
+      website: 'Site internet' as string,
+      database: 'Base de donnée' as string,
+    },
+  },
 };

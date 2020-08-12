@@ -7,13 +7,13 @@
   app>
     <v-list-item two-line class="px-2">
       <v-list-item-avatar>
-        <img src="https://randomuser.me/api/portraits/women/81.jpg">
+        <Avatar :customer="user" color="white" />
       </v-list-item-avatar>
 
       <v-list-item-content>
-        <v-list-item-title>Jane Smith</v-list-item-title>
+        <v-list-item-title>{{user.name}}</v-list-item-title>
         <v-list-item-subtitle>
-          jane.smith@orange.fr
+          {{user.email}}
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-btn
@@ -36,7 +36,7 @@
         <v-list-item-title>{{$t('menu.dashboard')}}</v-list-item-title>
       </v-list-item>
       <v-list-item link
-      @click="$router.push({ name: 'Client' })">
+      @click="$router.push({ name: 'Customers' })">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
@@ -107,11 +107,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Avatar from './Avatar.vue';
 
 export default Vue.extend({
   name: 'App',
 
   components: {
+    Avatar,
   },
 
   data: () => ({
@@ -160,6 +162,7 @@ export default Vue.extend({
       <polygon style="fill:#D80027;" points="368.307,196.634 512,116.804 512,85.33 512,85.33 311.652,196.634 "/>
     </svg>`,
     },
+    user: {} as object,
   }),
 
   methods: {
@@ -167,12 +170,30 @@ export default Vue.extend({
       localStorage.removeItem('token');
       this.$router.push({ name: 'Login' });
     },
+    getUser() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `${this.$store.state.API}/user/me`, true);
+      const token = localStorage.getItem('token');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== xhr.DONE) return;
+        if (xhr.status === 200) {
+          this.user = JSON.parse(xhr.response).user;
+        }
+        if (xhr.status === 401) {
+          this.disconnect();
+        }
+      };
+      xhr.send();
+    },
   },
 
   computed: {
   },
 
   mounted() {
+    this.getUser();
   },
 });
 </script>
