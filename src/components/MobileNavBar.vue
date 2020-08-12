@@ -2,7 +2,6 @@
   <v-bottom-navigation
     color="blue"
     fixed
-    hide-on-scroll
   >
     <v-btn @click="$router.push({ name: 'Dashboard' })">
       <span v-if="isXs">{{$t('menu.dashboard')}}</span>
