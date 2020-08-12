@@ -31,7 +31,7 @@
           <v-container v-if="warning.type === 'autocomplete'">
             {{$t('customerForm.messages.warning.autocomplete')}}
             <ul>
-              <li v-for="[item, index] in warning.existingInformation" :key="index">
+              <li v-for="item in warning.existingInformation" :key="item">
                 {{$t(`customerForm.formLabel.${item}`)}}
               </li>
             </ul>
