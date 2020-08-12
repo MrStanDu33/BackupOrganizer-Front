@@ -129,4 +129,12 @@ export default {
   createCustomer: <object> {
     createTitle: 'Creation of a new customer' as string,
   },
+  customerProjects: <object> {
+    title: 'Projects' as string,
+    dataHeader: <object> {
+      name: 'Name' as string,
+      website: 'Website' as string,
+      database: 'Database' as string,
+    },
+  },
 };

@@ -126,4 +126,12 @@ export default {
   createCustomer: <object> {
     createTitle: 'Création d\'un nouveau client' as string,
   },
+  customerProjects: <object> {
+    title: 'Projets' as string,
+    dataHeader: <object> {
+      name: 'Nom' as string,
+      website: 'Site internet' as string,
+      database: 'Base de donnée' as string,
+    },
+  },
 };
