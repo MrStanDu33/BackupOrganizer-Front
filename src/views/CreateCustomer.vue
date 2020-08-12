@@ -44,7 +44,8 @@ export default Vue.extend({
       source: '' as string,
       referent_name: '' as string,
       referent_email: '' as string,
-      referent_number: '' as string,
+      referent_number_indicative: '' as string,
+      referent_number_value: '' as string,
     },
   }),
 
