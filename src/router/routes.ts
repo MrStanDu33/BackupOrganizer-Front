@@ -4,6 +4,7 @@ import NewAccount from '../views/NewAccount.vue';
 import Customers from '../views/Customers.vue';
 import CustomerDetails from '../views/CustomerDetails.vue';
 import CreateCustomer from '../views/CreateCustomer.vue';
+import ProjectDetails from '../views/ProjectDetails.vue';
 
 export default [
   {
@@ -79,6 +80,19 @@ export default [
       name: <object> {
         fr: <string> 'Création d\'un nouveau client' as string,
         en: <string> 'Creation of a new customer' as string,
+      },
+      menu: true as boolean,
+      auth: true as boolean,
+    },
+  },
+  {
+    path: '/customer/:customerId/project/:projectId' as string,
+    name: 'projectDetails' as string,
+    component: ProjectDetails,
+    meta: <object> {
+      name: <object> {
+        fr: <string> 'Détails du projet' as string,
+        en: <string> 'Project details' as string,
       },
       menu: true as boolean,
       auth: true as boolean,
